@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Node
+  - WalkNode
+  - BlockNode
+  - LockNode
+  - WayParent
   layers:
   - Default
   - TransparentFX

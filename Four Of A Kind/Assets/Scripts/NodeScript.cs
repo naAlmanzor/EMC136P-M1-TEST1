@@ -13,10 +13,12 @@ public class NodeScript : MonoBehaviour
     {
         if(IsBlocking == true){
             this.gameObject.GetComponent<Renderer>().material = blockMaterial;    
+            this.gameObject.tag = "BlockNode";  
         }
 
         if(IsBlocking == true && IsLocked == true){
             this.gameObject.GetComponent<Renderer>().material = lockMaterial;    
+            this.gameObject.tag = "LockNode";   
         }
     }
     // Start is called before the first frame update
@@ -27,6 +29,8 @@ public class NodeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(!IsBlocking && !IsLocked) {
+            this.gameObject.tag = "WalkNode";  
+        }
     }
 }

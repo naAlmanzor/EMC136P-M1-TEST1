@@ -12,20 +12,33 @@ public class WaypointsList : MonoBehaviour
     [SerializeField] public GameObject[] waypointList;
     private void OnDrawGizmos(){
         
-        foreach(Transform t in transform)
+        if(transform.childCount != 0) {
+            foreach(Transform t in transform)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(t.position, waypointSize);
+            }
+            
+            Gizmos.color = Color.red;
+
+            for(int i = 0; i < transform.childCount - 1; i++){
+                Gizmos.DrawLine(transform.GetChild(i).position, transform.GetChild(i+1).position);
+            }
+
+            Gizmos.DrawLine(transform.GetChild(transform.childCount - 1).position, transform.GetChild(0).position);
+            // Debug.Log(transform.GetChild(0).name);
+        }
+    }
+
+    public Transform GetNextWaypoint(Transform waypoint)
+    { 
+        if(waypoint == null)
         {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(t.position, waypointSize);
-        }
-        
-        Gizmos.color = Color.red;
-
-        for(int i = 0; i < transform.childCount - 1; i++){
-            Gizmos.DrawLine(transform.GetChild(i).position, transform.GetChild(i+1).position);
+            return transform.GetChild(0);
         }
 
-        Gizmos.DrawLine(transform.GetChild(transform.childCount - 1).position, transform.GetChild(0).position);
-        // Debug.Log(transform.GetChild(0).name);
+        int nextIndex = (waypoint.GetSiblingIndex() + 1) % transform.childCount;
+        return transform.GetChild(nextIndex);
     }
 
     // Start is called before the first frame update
