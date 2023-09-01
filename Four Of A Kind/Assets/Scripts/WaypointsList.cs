@@ -10,6 +10,8 @@ public class WaypointsList : MonoBehaviour
     [Range (0f, 2f)]
     [SerializeField] private float waypointSize = 1f;
     [SerializeField] public GameObject[] waypointList;
+    private LineRenderer lineRenderer;
+
     private void OnDrawGizmos(){
         
         if(transform.childCount != 0) {
@@ -25,7 +27,7 @@ public class WaypointsList : MonoBehaviour
                 Gizmos.DrawLine(transform.GetChild(i).position, transform.GetChild(i+1).position);
             }
 
-            Gizmos.DrawLine(transform.GetChild(transform.childCount - 1).position, transform.GetChild(0).position);
+            // Gizmos.DrawLine(transform.GetChild(transform.childCount - 1).position, transform.GetChild(0).position);
             // Debug.Log(transform.GetChild(0).name);
         }
     }
@@ -37,20 +39,59 @@ public class WaypointsList : MonoBehaviour
             return transform.GetChild(0);
         }
 
-        int nextIndex = (waypoint.GetSiblingIndex() + 1) % transform.childCount;
+        int nextIndex = waypoint.GetSiblingIndex() + 1;
+
+        if(nextIndex >= transform.childCount)
+        {
+            return null;
+        }
+
         return transform.GetChild(nextIndex);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void RemoveLastWaypoint()
     {
+        if(transform.childCount > 1)
+        {
+            Destroy(transform.GetChild(transform.childCount - 1).gameObject);
+        }
+        else Debug.Log("Can't destroy starting position");
         
     }
 
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    private void Start()
     {
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
+
+        if(lineRenderer == null) {
+            lineRenderer = gameObject.AddComponent<LineRenderer>();
+        }
+
+        lineRenderer.material = new Material(Shader.Find("Standard"))
+        {
+            color = Color.green
+        };
+        lineRenderer.widthMultiplier = 0.5f; // Set the width of the line
+    }
+
+
+    // Update is called once per frame
+    private void Update() 
+    {
+        UpdateLineRenderer();
+    }
+
+    private void UpdateLineRenderer() 
+    {
+        Vector3[] points = new Vector3[transform.childCount];
         
+        for (int i = 0; i < transform.childCount; i++) {
+            points[i] = transform.GetChild(i).position;
+        }
+        
+        lineRenderer.positionCount = points.Length;
+        lineRenderer.SetPositions(points);
     }
 }
 

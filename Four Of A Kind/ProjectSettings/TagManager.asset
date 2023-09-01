@@ -8,6 +8,7 @@ TagManager:
   - BlockNode
   - LockNode
   - WayParent
+  - Key
   layers:
   - Default
   - TransparentFX
