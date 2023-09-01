@@ -27,6 +27,15 @@ public class NodeScript : MonoBehaviour
             gameObject.GetComponent<Renderer>().material = lockMaterial;    
             gameObject.tag = "LockNode";   
         }
+
+        if(IsGoal) {
+            gameObject.tag = "Finish";
+        }
+
+        if(IsGoal && IsLocked) {
+            gameObject.GetComponent<Renderer>().material = lockMaterial;  
+            gameObject.tag = "LockedFinish";
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -36,16 +45,13 @@ public class NodeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        if(IsGoal) {
-            gameObject.tag = "Finish";
-        }
         if(!IsBlocking && !IsLocked && !IsGoal) {
             gameObject.tag = "WalkNode";  
         }
 
-        if(gameStats.IsKeyObtained() && gameObject.tag == "LockNode") {
+        if(gameStats.IsKeyObtained() && (gameObject.tag == "LockNode" || gameObject.tag == "LockedFinish")) {
             gameObject.GetComponent<Renderer>().material = defaultMaterial;  
-            gameObject.tag = "WalkNode";   
+            gameObject.tag = "Finish";   
             IsLocked = false;
         }
     }

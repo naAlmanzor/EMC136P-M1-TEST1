@@ -9,6 +9,7 @@ TagManager:
   - LockNode
   - WayParent
   - Key
+  - LockedFinish
   layers:
   - Default
   - TransparentFX

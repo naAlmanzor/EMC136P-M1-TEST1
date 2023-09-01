@@ -49,17 +49,17 @@ public class PlayerScript : MonoBehaviour
             {
                 GameObject clickedObject = hit.collider.gameObject;
                 // Debug.Log("Clicked on: " + clickedObject.name);
-                if (clickedObject.tag == "LockNode")
-                {
-                    // Debug.Log("Locked Node");
-                }
+                // if (clickedObject.tag == "LockNode")
+                // {
+                //     // Debug.Log("Locked Node");
+                // }
 
-                if (clickedObject.tag == "BlockNode")
-                {
-                    // Debug.Log("Blocked Node");
-                }
+                // if (clickedObject.tag == "BlockNode")
+                // {
+                //     // Debug.Log("Blocked Node");
+                // }
 
-                if (clickedObject.tag == "WalkNode" || clickedObject.tag == "Finish")
+                if (clickedObject.tag == "WalkNode" || clickedObject.tag == "Finish" || clickedObject.tag == "LockedFinish")
                 {
                     // Debug.Log("Valid Node");
                     if (gameStats.GetWaypointCount() != 0)
@@ -67,12 +67,19 @@ public class PlayerScript : MonoBehaviour
                         gameStats.SetCount(-1);
                         Vector3 nodeXY = new(clickedObject.transform.position.x, 1.06f, clickedObject.transform.position.z);
                         AddWaypoint(nodeXY);
-                        // Debug.Log("Waypoint Added");
+                        Debug.Log("Waypoint Added");
                     }
                     // else Debug.Log("Out of Waypoints");
 
 
                 }
+                // if (gameStats.GetWaypointCount() != 0)
+                // {
+                //     gameStats.SetCount(-1);
+                //     Vector3 nodeXY = new(clickedObject.transform.position.x, 1.06f, clickedObject.transform.position.z);
+                //     AddWaypoint(nodeXY);
+                //     Debug.Log("Waypoint Added");
+                // }
             }
         }
 
