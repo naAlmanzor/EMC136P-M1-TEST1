@@ -6,6 +6,7 @@ public class NodeScript : MonoBehaviour
 {
     [SerializeField] private bool IsBlocking;
     [SerializeField] private bool IsLocked;
+    [SerializeField] private bool waypointNode;
     [SerializeField] private Material blockMaterial;
     [SerializeField] private Material lockMaterial;
 

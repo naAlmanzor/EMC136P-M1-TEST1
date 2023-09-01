@@ -46,6 +46,14 @@ public class NodesListEditor : Editor
             }
             
         }
+
+        if(GUILayout.Button("Rename All Nodes")){
+            foreach(Transform child in thisTarget.transform)
+            {
+              child.name = "Node " + (i++).ToString("000");
+            }
+            
+        }
     }
 }
 #endif
