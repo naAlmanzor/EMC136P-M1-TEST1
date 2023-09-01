@@ -1736,6 +1736,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1858275953088041156, guid: f78e61856430e0741acd72504d01e7c0, type: 3}
   m_PrefabInstance: {fileID: 543804637}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &543804640 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4593840924823614197, guid: f78e61856430e0741acd72504d01e7c0, type: 3}
+  m_PrefabInstance: {fileID: 543804637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &556908704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8248,6 +8253,7 @@ MonoBehaviour:
   defaultMaterial: {fileID: 2100000, guid: 57b814a082ef37f498b3e622955b5b5f, type: 2}
   blockMaterial: {fileID: 2100000, guid: 95e1f730ebc3f82439dec855230258c9, type: 2}
   lockMaterial: {fileID: 2100000, guid: 4abc2e0c32ef123438a81d4dad445a2a, type: 2}
+  blockCube: {fileID: 543804640}
   waypointPrefab: {fileID: 75056948639993067, guid: 4df91da4e0828474896dd963f790a1b8, type: 3}
 --- !u!4 &2093013602
 Transform:

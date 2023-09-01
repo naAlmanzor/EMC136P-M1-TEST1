@@ -14,7 +14,8 @@ public class NodeScript : MonoBehaviour
     {
         if(IsBlocking == true){
             this.gameObject.GetComponent<Renderer>().material = blockMaterial;    
-            this.gameObject.tag = "BlockNode";  
+            this.gameObject.tag = "BlockNode";
+            // this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
 
         if(IsBlocking == true && IsLocked == true){
