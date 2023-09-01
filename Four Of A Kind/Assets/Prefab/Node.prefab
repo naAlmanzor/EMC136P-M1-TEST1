@@ -122,10 +122,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsBlocking: 0
   IsLocked: 0
+  IsGoal: 0
   waypointNode: 0
   defaultMaterial: {fileID: 2100000, guid: 57b814a082ef37f498b3e622955b5b5f, type: 2}
   blockMaterial: {fileID: 2100000, guid: 95e1f730ebc3f82439dec855230258c9, type: 2}
   lockMaterial: {fileID: 2100000, guid: 4abc2e0c32ef123438a81d4dad445a2a, type: 2}
+  goalMaterial: {fileID: 2100000, guid: 42442aed560ccdc4a8fda14cc76b5faf, type: 2}
   gameStats: {fileID: 11400000, guid: 1bef8ba9121480b4dad0ac01313019c1, type: 2}
 --- !u!1 &6404435290139477539
 GameObject:

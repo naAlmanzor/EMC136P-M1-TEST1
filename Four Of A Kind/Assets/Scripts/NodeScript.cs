@@ -10,9 +10,11 @@ public class NodeScript : MonoBehaviour
     [SerializeField] private bool IsGoal;
     [SerializeField] private bool waypointNode;
     
+    [Header("Node Materials")]
     [SerializeField] private Material defaultMaterial;
     [SerializeField] private Material blockMaterial;
     [SerializeField] private Material lockMaterial;
+    [SerializeField] private Material goalMaterial;
 
     [SerializeField] private GameStats gameStats;
 
@@ -21,7 +23,6 @@ public class NodeScript : MonoBehaviour
         if(IsBlocking){
             gameObject.GetComponent<Renderer>().material = blockMaterial;    
             gameObject.tag = "BlockNode";
-            // this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
 
         if(IsLocked){
@@ -34,7 +35,8 @@ public class NodeScript : MonoBehaviour
         }
 
         if(IsGoal && IsLocked) {
-            gameObject.GetComponent<Renderer>().material = lockMaterial;  
+            gameObject.GetComponent<Renderer>().material = goalMaterial;
+            goalMaterial.SetColor("_Color", Color.yellow);
             gameObject.tag = "LockedFinish";
         }
     }
@@ -51,7 +53,8 @@ public class NodeScript : MonoBehaviour
         }
 
         if(gameStats.IsKeyObtained() && (gameObject.tag == "LockNode" || gameObject.tag == "LockedFinish")) {
-            gameObject.GetComponent<Renderer>().material = defaultMaterial;  
+            // gameObject.GetComponent<Renderer>().material = defaultMaterial;
+            goalMaterial.SetColor("_Color", Color.green); 
             gameObject.tag = "Finish";   
             IsLocked = false;
         }
