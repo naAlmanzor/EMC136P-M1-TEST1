@@ -2137,7 +2137,7 @@ PrefabInstance:
     - target: {fileID: 7859301384840842990, guid: b3510ccc8da335240a76a2e44432b5d3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 285662729}
     - target: {fileID: 7859301384840842990, guid: b3510ccc8da335240a76a2e44432b5d3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Undo
@@ -3246,7 +3246,7 @@ GameObject:
   - component: {fileID: 1559189522}
   - component: {fileID: 1559189521}
   - component: {fileID: 1559189520}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Key
   m_TagString: Key
   m_Icon: {fileID: 0}

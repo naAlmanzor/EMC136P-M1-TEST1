@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,51 +6,46 @@ using UnityEditor;
 public class NodesList : MonoBehaviour
 {
     [SerializeField] public GameObject[] nodeList;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
 }
 
 #if UNITY_EDITOR
+// Custom Editor for the NodesList script
 [CustomEditor(typeof(NodesList))]
 public class NodesListEditor : Editor
 {
-    int i;
+    int i; // Counter variable for operations involving arrays
 
+    // Draw the custom inspector
     public override void OnInspectorGUI()
     {
         var thisTarget = (NodesList)target;
-        if(thisTarget == null) return;
+        if (thisTarget == null) return;
 
+        // Draw default inspector controls
         DrawDefaultInspector();
 
-        // Adds all node children to the list
-        if(GUILayout.Button("Add All Nodes")){
+        // Adds all node children to the list when the button is clicked
+        if (GUILayout.Button("Add All Nodes"))
+        {
+            // Initialize the nodeList based on the number of children
             thisTarget.nodeList = new GameObject[thisTarget.transform.childCount];
+            i = 0;
 
-            foreach(Transform child in thisTarget.transform)
+            // Populate the nodeList
+            foreach (Transform child in thisTarget.transform)
             {
-              thisTarget.nodeList[i++] = child.gameObject;
+                thisTarget.nodeList[i++] = child.gameObject;
             }
-            
         }
 
-        if(GUILayout.Button("Rename All Nodes")){
-            foreach(Transform child in thisTarget.transform)
+        // Renames all nodes when the button is clicked
+        if (GUILayout.Button("Rename All Nodes"))
+        {
+            i = 0;
+            foreach (Transform child in thisTarget.transform)
             {
-              child.name = "Node " + (i++).ToString("000");
+                child.name = "Node " + (i++).ToString("000");
             }
-            
         }
     }
 }

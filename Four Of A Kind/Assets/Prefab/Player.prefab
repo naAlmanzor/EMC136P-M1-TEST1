@@ -218,7 +218,12 @@ MonoBehaviour:
   rotationSpeed: 5
   waypointPrefab: {fileID: 75056948639993067, guid: 4df91da4e0828474896dd963f790a1b8, type: 3}
   wpText: {fileID: 0}
+  moveButton: {fileID: 0}
+  undoButton: {fileID: 0}
   gameStats: {fileID: 11400000, guid: 1bef8ba9121480b4dad0ac01313019c1, type: 2}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4
 --- !u!136 &4995951501807913110
 CapsuleCollider:
   m_ObjectHideFlags: 0

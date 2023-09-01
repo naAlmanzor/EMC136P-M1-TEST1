@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerScript : MonoBehaviour
     private int maxWP = 4;
     private bool reachedLastWaypoint = false;
     [SerializeField] private TextMeshProUGUI wpText;
+    [SerializeField] private Button moveButton, undoButton;
 
     [Header("GameStatsSO")]
     [SerializeField] private GameStats gameStats;
@@ -35,6 +37,9 @@ public class PlayerScript : MonoBehaviour
 
         Vector3 playerXY = new(transform.position.x, 1.06f, transform.position.z);
         AddWaypoint(playerXY);
+
+        moveButton = GameObject.FindGameObjectWithTag("StartButton").GetComponent<Button>();
+        undoButton = GameObject.FindGameObjectWithTag("UndoButton").GetComponent<Button>();
     }
 
     private void Update()
@@ -48,18 +53,8 @@ public class PlayerScript : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 GameObject clickedObject = hit.collider.gameObject;
-                // Debug.Log("Clicked on: " + clickedObject.name);
-                // if (clickedObject.tag == "LockNode")
-                // {
-                //     // Debug.Log("Locked Node");
-                // }
-
-                // if (clickedObject.tag == "BlockNode")
-                // {
-                //     // Debug.Log("Blocked Node");
-                // }
-
-                if (clickedObject.tag == "WalkNode" || clickedObject.tag == "Finish" || clickedObject.tag == "LockedFinish")
+                
+                if (clickedObject.tag == "WalkNode" || clickedObject.tag == "Finish" || clickedObject.tag == "LockedFinish" || clickedObject.tag == "Key")
                 {
                     // Debug.Log("Valid Node");
                     if (gameStats.GetWaypointCount() != 0)
@@ -69,21 +64,46 @@ public class PlayerScript : MonoBehaviour
                         AddWaypoint(nodeXY);
                         Debug.Log("Waypoint Added");
                     }
-                    // else Debug.Log("Out of Waypoints");
-
-
                 }
-                // if (gameStats.GetWaypointCount() != 0)
-                // {
-                //     gameStats.SetCount(-1);
-                //     Vector3 nodeXY = new(clickedObject.transform.position.x, 1.06f, clickedObject.transform.position.z);
-                //     AddWaypoint(nodeXY);
-                //     Debug.Log("Waypoint Added");
-                // }
             }
         }
 
-        if(buttonPressed) MoveTowardsWaypoint();
+        if(buttonPressed) 
+        {
+
+            moveButton.enabled = false;
+            moveButton.image.color = new(
+                moveButton.image.color.r,
+                moveButton.image.color.g,
+                moveButton.image.color.b,
+                0.3f
+            );
+            undoButton.enabled = false;
+            undoButton.image.color = new(
+                undoButton.image.color.r,
+                undoButton.image.color.g,
+                undoButton.image.color.b,
+                0.3f
+            );
+            MoveTowardsWaypoint();
+        }
+        else
+        {
+            moveButton.enabled = true;
+            moveButton.image.color = new(
+                moveButton.image.color.r,
+                moveButton.image.color.g,
+                moveButton.image.color.b,
+                1f
+            );
+            undoButton.enabled = true;
+            undoButton.image.color = new(
+                undoButton.image.color.r,
+                undoButton.image.color.g,
+                undoButton.image.color.b,
+                1f
+            );
+        }
 
         if(reachedLastWaypoint && !gameStats.levelCleared)
         {

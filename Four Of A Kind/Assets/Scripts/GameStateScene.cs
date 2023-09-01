@@ -10,7 +10,7 @@ public class GameStateScene : MonoBehaviour
     [SerializeField] private GameStats gameStats;
     [SerializeField] private TextMeshProUGUI gameOverText, clearText;
     [SerializeField] private GameObject retryButton, nextButton;
-    // Start is called before the first frame update
+
     void Start()
     {
         if(gameStats.levelCleared) {
@@ -28,12 +28,14 @@ public class GameStateScene : MonoBehaviour
 
     public void Next()
     {
-        SceneManager.LoadScene(SceneUtility.GetBuildIndexByScenePath("Assets/Scenes/" + gameStats.previousLevel + ".unity") + 1);
+        if(SceneUtility.GetBuildIndexByScenePath(gameStats.previousLevel) != 4) {
+            SceneManager.LoadScene(SceneUtility.GetBuildIndexByScenePath("Assets/Scenes/" + gameStats.previousLevel + ".unity") + 1);
+        }
+        else Quit();
     }
 
     public void Quit()
     {
-        // Application.Quit(0);
         SceneManager.LoadScene("MainMenuScene");
     }
 }
